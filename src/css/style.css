@@ -1,0 +1,906 @@
+/* ==========================================
+   1. VARIÁVEIS E RESET
+   ========================================== */
+:root {
+    --color-primary: #005A8D;
+    /* Azul Aço */
+    --color-primary-dark: #003B5C;
+    /* Azul Escuro Sombra */
+    --color-primary-light: #0084CA;
+    /* Azul Brilho Metal */
+    --color-black: #121619;
+    /* Preto Industrial */
+    --color-dark-gray: #2B303A;
+    /* Cinza Antracite */
+    --color-mid-gray: #6C757D;
+    /* Cinza Texto Secundário */
+    --color-light-gray: #F4F6F8;
+    /* Cinza Claro Fundo */
+    --color-silver: #E2E8F0;
+    /* Prata Bordas */
+    --color-white: #FFFFFF;
+    /* Branco Puríssimo */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --transition: all 0.3s ease;
+    --border-radius: 6px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-dark-gray);
+    background-color: var(--color-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: var(--color-black);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================
+   2. COMPONENTES UTILITÁRIOS
+   ========================================== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 15px rgba(0, 90, 141, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 90, 141, 0.4);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border-color: var(--color-white);
+    color: var(--color-white);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.btn-nav-orcamento {
+    display: none;
+}
+
+@media(min-width: 993px) {
+    .btn-nav-orcamento {
+        display: inline-block;
+    }
+}
+
+.btn-about-speak {
+    margin-top: 15px;
+}
+
+.btn-submit {
+    width: 100%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header.text-left {
+    text-align: left;
+}
+
+.section-header .tag {
+    display: inline-block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 90, 141, 0.08);
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-primary);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.section-header.text-left h2::after {
+    margin-left: 0;
+}
+
+/* ==========================================
+   3. CABEÇALHO E NAVEGAÇÃO
+   ========================================== */
+.top-bar {
+    background-color: var(--color-black);
+    color: var(--color-silver);
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-info span {
+    margin-right: 20px;
+}
+
+.top-info i {
+    color: var(--color-primary-light);
+    margin-right: 6px;
+}
+
+.top-social a {
+    color: var(--color-silver);
+    margin-left: 12px;
+}
+
+.top-social a:hover {
+    color: var(--color-primary-light);
+}
+
+header {
+    background-color: var(--color-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 15px;
+}
+
+/* --- LOGO COM IMAGEM --- */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-footer {
+    margin-bottom: 15px;
+}
+
+/* Controle do tamanho da logo.jpeg no Header */
+.logo-img {
+    height: 100px;
+    /* Altere este valor para diminuir/aumentar a imagem no cabeçalho */
+    width: auto;
+    /* Mantém a proporção original da imagem */
+    object-fit: contain;
+    display: block;
+}
+
+/* Controle do tamanho da logo.jpeg no Footer */
+.logo-img-footer {
+    height: 32px;
+    /* Tamanho ajustado para o rodapé */
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text .brand {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--color-black);
+    letter-spacing: -1px;
+}
+
+.brand-footer {
+    color: var(--color-white);
+    font-size: 1.4rem;
+}
+
+.logo-text .subtext {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--color-black);
+    text-transform: uppercase;
+}
+
+.subtext-footer {
+    color: var(--color-silver);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-menu a {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-dark-gray);
+    text-transform: uppercase;
+    position: relative;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--color-primary);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: var(--transition);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+    width: 100%;
+}
+
+.mobile-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--color-black);
+    cursor: pointer;
+}
+
+/* ==========================================
+   4. HERO SECTION (BANNER)
+   ========================================== */
+.hero {
+    position: relative;
+    background: linear-gradient(135deg, rgba(18, 22, 25, 0.92) 0%, rgba(0, 59, 92, 0.85) 100%),
+        url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color: var(--color-white);
+    padding: 120px 0;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: var(--color-white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: var(--color-silver);
+    margin-bottom: 35px;
+    max-width: 650px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* ==========================================
+   5. SOBRE A EMPRESA
+   ========================================== */
+.about {
+    padding: 90px 0;
+    background-color: var(--color-white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-img-box {
+    position: relative;
+}
+
+.about-img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: block;
+}
+
+.about-experience {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.about-experience .num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    line-height: 1;
+}
+
+.about-experience .txt {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.about-text p {
+    color: var(--color-mid-gray);
+    margin-bottom: 20px;
+}
+
+.features-list {
+    margin: 25px 0;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.features-list i {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   6. SERVIÇOS (CARDS)
+   ========================================== */
+.services {
+    padding: 90px 0;
+    background-color: var(--color-light-gray);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--color-white);
+    padding: 35px 25px;
+    border-radius: var(--border-radius);
+    border-bottom: 4px solid transparent;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    border-bottom-color: var(--color-primary);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 90, 141, 0.1);
+    color: var(--color-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    color: var(--color-mid-gray);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.service-link {
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.service-link:hover {
+    gap: 10px;
+}
+
+/* ==========================================
+   7. TRABALHOS REALIZADOS (PORTFÓLIO)
+   ========================================== */
+.portfolio {
+    padding: 90px 0;
+    background-color: var(--color-white);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    height: 260px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(18, 22, 25, 0.9) 0%, rgba(0, 90, 141, 0.4) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.08);
+}
+
+.portfolio-tag {
+    color: var(--color-primary-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.portfolio-overlay h3 {
+    color: var(--color-white);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+
+.portfolio-overlay p {
+    color: var(--color-silver);
+    font-size: 0.85rem;
+}
+
+/* ==========================================
+   8. CLIENTES E EMPRESAS ATENDIDAS
+   ========================================== */
+.clients {
+    padding: 60px 0;
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.clients-title {
+    text-align: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-mid-gray);
+    margin-bottom: 35px;
+}
+
+.clients-carousel {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.clients-track {
+    display: flex;
+    width: max-content;
+    animation: clients-scroll 30s linear infinite;
+}
+
+.clients-carousel:hover .clients-track {
+    animation-play-state: paused;
+}
+
+.client-item {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 70px;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition);
+}
+
+.client-item img:hover {
+    filter: none;
+}
+
+@keyframes clients-scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .clients-track {
+        animation: none;
+    }
+}
+
+/* ==========================================
+   9. SEÇÃO CONTATO
+   ========================================== */
+.contact {
+    padding: 90px 0;
+    background-color: var(--color-light-gray);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.contact-info {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 45px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-info h3 {
+    color: var(--color-white);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.contact-info p {
+    color: var(--color-silver);
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-item i {
+    color: var(--color-primary-light);
+    font-size: 1.2rem;
+    margin-top: 4px;
+}
+
+.info-item h4 {
+    color: var(--color-white);
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.info-item p {
+    color: var(--color-silver);
+    margin-bottom: 0;
+    font-size: 0.85rem;
+}
+
+.contact-urgency {
+    margin-top: 30px;
+}
+
+.contact-urgency p {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.contact-form {
+    padding: 45px 35px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: var(--color-dark-gray);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    border: 1px solid var(--color-silver);
+    border-radius: 4px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 90, 141, 0.1);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ==========================================
+   10. RODAPÉ (FOOTER)
+   ========================================== */
+footer {
+    background-color: var(--color-black);
+    color: var(--color-silver);
+    padding: 60px 0 20px;
+    border-top: 3px solid var(--color-primary);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-about p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--color-mid-gray);
+}
+
+.footer-title {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    font-size: 0.9rem;
+    color: var(--color-silver);
+}
+
+.footer-links a:hover {
+    color: var(--color-primary-light);
+    padding-left: 5px;
+}
+
+.footer-quality-text {
+    font-size: 0.85rem;
+    color: var(--color-mid-gray);
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.85rem;
+    color: var(--color-mid-gray);
+}
+
+/* ==========================================
+   11. RESPONSIVIDADE
+   ========================================== */
+@media (max-width: 992px) {
+
+    .about-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
