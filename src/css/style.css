@@ -903,4 +903,16 @@ footer {
     .footer-grid {
         grid-template-columns: 1fr;
     }
+
+    .portfolio-overlay {
+        opacity: 1;
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+    }
+
+    .portfolio-item:hover img {
+        transform: none;
+    }
 }
